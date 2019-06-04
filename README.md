@@ -7,9 +7,76 @@
 
 # Jest Parameterised Testing with objects
 
+## What it's for
+
+[jest-each](https://www.npmjs.com/package/jest-each) and Jest's built in `it.each()` etc methods are great for defining a batch of test cases in one go.
+
+```js
+it.each( [
+  [1, 2, 3],
+  [4, 5, 9]
+] )('%s + %s = %s', (left, right, sum) => {
+  expect(left + right).toBe(sum);
+} );
+```
+
+But the test name has to be constructed in printf-style, which doesn't allow named parameters. This sometimes makes the cases hard to write clearly.
+
+This library is a solution to that problem.
+
 ## Usage
 
-This module is under development and not ready for use yet.
+### Stand-alone
+
+```js
+const eachObject = require('jest-each-object');
+
+eachObject( [
+  {left: 1, right: 2, sum: 3},
+  {left: 4, right: 5, sum: 9},
+] ).it('$left + $right = $sum', ( {left, right, sum} ) => {
+  expect(left + right).toBe(sum);
+} );
+```
+
+`eachObject()` has same signature as [jest-each](https://www.npmjs.com/package/jest-each). You can postpend `eachObject()` with:
+
+* `.it()`
+* `.test()`
+* `.describe()`
+* `.it.skip()` / `.test.skip()` / `.describe.skip()`
+* `.it.only()` / `.test.only()` / `.describe.only()`
+
+### Add global methods
+
+At the top of your test file:
+
+```js
+require('jest-each-object/register');
+```
+
+Now you can substitute `.eachObject()` anywhere you could use `.each()`.
+
+```js
+it.eachObject( [
+  {left: 1, right: 2, sum: 3},
+  {left: 4, right: 5, sum: 9},
+] )('$left + $right = $sum', ( {left, right, sum} ) => {
+  expect(left + right).toBe(sum);
+} );
+
+describe.eachObject( /* ... */ )( /* ... */ );
+
+it.skip.eachObject( /* ... */ )( /* ... */ );
+describe.only.eachObject( /* ... */ )( /* ... */ );
+xdescribe.eachObject( /* ... */ )( /* ... */ );
+
+/* ... etc etc ... */
+```
+
+## Credits
+
+The clever stuff is done by this library's dependency [jest-each-table](https://www.npmjs.com/package/jest-each-table). `jest-each-object` just adds sugar.
 
 ## Tests
 

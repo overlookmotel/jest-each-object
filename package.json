@@ -13,7 +13,10 @@
   "bugs": {
     "url": "https://github.com/overlookmotel/jest-each-object/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "jest-each": "^24.8.0",
+    "jest-each-table": "^1.1.0"
+  },
   "devDependencies": {
     "@overlookmotel/eslint-config": "^3.0.2",
     "@overlookmotel/eslint-config-jest": "^1.1.1",
@@ -27,9 +30,9 @@
     "jest": "^23.6.0"
   },
   "keywords": [
-	"jest",
-	"test",
-	"each"
+    "jest",
+    "test",
+    "each"
   ],
   "scripts": {
     "test": "npm run lint && npm run test-main",

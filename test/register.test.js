@@ -6,7 +6,7 @@
 'use strict';
 
 // Modules
-const eachObject = require('../index');
+require('../register');
 
 // Init
 require('./utils');
@@ -24,10 +24,10 @@ const cases = [
 const expectedRuns = cases.map((props, index) => ({'#': index + 1, ...props}));
 
 describe.each([
-	['eachObject().it', (name, fn) => eachObject(cases).it(name, fn)],
-	['eachObject().test', (name, fn) => eachObject(cases).test(name, fn)],
-	['eachObject().describe', (name, fn) => (
-		eachObject(cases).describe('ignore me!', (props) => {
+	['it.eachObject()', (name, fn) => it.eachObject(cases)(name, fn)],
+	['test.eachObject()', (name, fn) => test.eachObject(cases)(name, fn)],
+	['describe.eachObject()', (name, fn) => (
+		describe.eachObject(cases)('ignore me!', (props) => {
 			it(name, () => { // eslint-disable-line jest/expect-expect
 				fn(props);
 			});
@@ -45,19 +45,19 @@ describe.each([
 });
 
 describe.each([
-	['eachObject().it.skip', (name, fn) => eachObject(cases).it.skip(name, fn)],
-	['eachObject().test.skip', (name, fn) => eachObject(cases).test.skip(name, fn)],
-	['eachObject().describe.skip', (name, fn) => (
-		eachObject(cases).describe.skip('ignore me!', (props) => {
+	['it.skip.eachObject()', (name, fn) => it.skip.eachObject(cases)(name, fn)],
+	['test.skip.eachObject()', (name, fn) => test.skip.eachObject(cases)(name, fn)],
+	['describe.skip.eachObject()', (name, fn) => (
+		describe.skip.eachObject(cases)('ignore me!', (props) => {
 			it(name, () => { // eslint-disable-line jest/expect-expect
 				fn(props);
 			});
 		})
 	)],
-	['eachObject().xit', (name, fn) => eachObject(cases).xit(name, fn)],
-	['eachObject().xtest', (name, fn) => eachObject(cases).xtest(name, fn)],
-	['eachObject().xdescribe', (name, fn) => (
-		eachObject(cases).xdescribe('ignore me!', (props) => {
+	['xit.eachObject()', (name, fn) => xit.eachObject(cases)(name, fn)],
+	['xtest.eachObject()', (name, fn) => xtest.eachObject(cases)(name, fn)],
+	['xdescribe.eachObject()', (name, fn) => (
+		xdescribe.eachObject(cases)('ignore me!', (props) => {
 			it(name, () => { // eslint-disable-line jest/expect-expect
 				fn(props);
 			});
