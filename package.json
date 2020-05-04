@@ -14,7 +14,7 @@
     "url": "https://github.com/overlookmotel/jest-each-object/issues"
   },
   "dependencies": {
-    "jest-each": "^24.8.0",
+    "jest-each": "^26.0.0",
     "jest-each-table": "^1.1.0"
   },
   "devDependencies": {
